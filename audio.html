@@ -1,0 +1,256 @@
+<!doctype>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+    <script src="./audio.js"></script>
+    <style>
+      body {
+        margin: 5px;
+      }
+
+      .clear {
+        clear: both;
+      }
+
+      .off .title {
+        color: #999;
+      }
+
+      .ui-radio .ui-btn-active.ui-first-child {
+        background-color: #00BF05;
+        border-color: #ddd;
+      }
+
+      .ui-radio .ui-btn-active.ui-last-child {
+        background-color: #E82C0C;
+        border-color: #ddd;
+      }
+
+      .zone {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #aaa;
+      }
+
+      .zone.noDivider {
+        margin-top: 0px;
+        padding-top: 0px;
+        border-top: none;
+      }
+
+      .title {
+        font-weight: bold;
+        line-height: 3em;
+        text-align: center;
+      }
+
+      .powerContainer {
+        float: left;
+        margin-left: 5px;
+      }
+
+      .volumeContainer {
+      }
+
+      .inputContainer {
+        float: right;
+      }
+
+      /* Hide the number input */
+      .full-width-slider .ui-slider input {
+        display: none;
+      }
+
+      .full-width-slider .ui-slider-track {
+        margin-left: 15px;
+      }
+
+      /* iphone 5 styles */
+      @media screen and ( max-height: 570px ) {
+        body {
+          font-size: 80%;
+        }
+        .zone {
+          margin-top: 0px;
+          padding-top: 0px;
+          border-top: 1px solid #aaa;
+        }
+        .title {
+          font-size: 130%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div data-role="page" class="full-width-slider">
+      <form>
+        <!-- ========================================= -->
+        <div id="zone-1" class="zone noDivider off">
+          <div class='powerContainer'>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+              <input type="radio" name="power-1" id="power-1-on" value="on">
+              <label for="power-1-on">On</label>
+              <input type="radio" name="power-1" id="power-1-off" value="off" checked="checked">
+              <label for="power-1-off">Off</label>
+            </fieldset>
+          </div>
+          <div class='inputContainer'>
+            <select name="input-1" id="input-1" data-mini="true" disabled="true">
+              <option value="1">Input 1</option>
+              <option value="2">Input 2</option>
+              <option value="3">Input 3</option>
+              <option value="4">Input 4</option>
+              <option value="5">Input 5</option>
+              <option value="6">Input 6</option>
+            </select>
+          </div>
+          <div class='title' id='title-1'>Loading...</div>
+          <div class='clear'></div>
+          <div class='volumeContainer'>
+            <input type="range" name="volume-1" id="volume-1" min="0" max="100" value="50" disabled="true">
+          </div>
+        </div>
+
+        <!-- ========================================= -->
+        <div id="zone-2" class="zone off">
+          <div class='powerContainer'>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+              <input type="radio" name="power-2" id="power-2-on" value="on">
+              <label for="power-2-on">On</label>
+              <input type="radio" name="power-2" id="power-2-off" value="off" checked="checked">
+              <label for="power-2-off">Off</label>
+            </fieldset>
+          </div>
+          <div class='inputContainer'>
+            <select name="input-2" id="input-2" data-mini="true" disabled="true">
+              <option value="1">Input 1</option>
+              <option value="2">Input 2</option>
+              <option value="3">Input 3</option>
+              <option value="4">Input 4</option>
+              <option value="5">Input 5</option>
+              <option value="6">Input 6</option>
+            </select>
+          </div>
+          <div class='title' id='title-2'></div>
+          <div class='clear'></div>
+          <div class='volumeContainer'>
+            <input type="range" name="volume-2" id="volume-2" min="0" max="100" value="50" disabled="true">
+          </div>
+        </div>
+
+        <!-- ========================================= -->
+        <div id="zone-3" class="zone off">
+          <div class='powerContainer'>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+              <input type="radio" name="power-3" id="power-3-on" value="on">
+              <label for="power-3-on">On</label>
+              <input type="radio" name="power-3" id="power-3-off" value="off" checked="checked">
+              <label for="power-3-off">Off</label>
+            </fieldset>
+          </div>
+          <div class='inputContainer'>
+            <select name="input-3" id="input-3" data-mini="true" disabled="true">
+              <option value="1">Input 1</option>
+              <option value="2">Input 2</option>
+              <option value="3">Input 3</option>
+              <option value="4">Input 4</option>
+              <option value="5">Input 5</option>
+              <option value="6">Input 6</option>
+            </select>
+          </div>
+          <div class='title' id='title-3'></div>
+          <div class='clear'></div>
+          <div class='volumeContainer'>
+            <input type="range" name="volume-3" id="volume-3" min="0" max="100" value="50" disabled="true">
+          </div>
+        </div>
+
+        <!-- ========================================= -->
+        <div id="zone-4" class="zone off">
+          <div class='powerContainer'>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+              <input type="radio" name="power-4" id="power-4-on" value="on">
+              <label for="power-4-on">On</label>
+              <input type="radio" name="power-4" id="power-4-off" value="off" checked="checked">
+              <label for="power-4-off">Off</label>
+            </fieldset>
+          </div>
+          <div class='inputContainer'>
+            <select name="input-4" id="input-4" data-mini="true" disabled="true">
+              <option value="1">Input 1</option>
+              <option value="2">Input 2</option>
+              <option value="3">Input 3</option>
+              <option value="4">Input 4</option>
+              <option value="5">Input 5</option>
+              <option value="6">Input 6</option>
+            </select>
+          </div>
+          <div class='title' id='title-4'></div>
+          <div class='clear'></div>
+          <div class='volumeContainer'>
+            <input type="range" name="volume-4" id="volume-4" min="0" max="100" value="50" disabled="true">
+          </div>
+        </div>
+
+        <!-- ========================================= -->
+        <div id="zone-5" class="zone off">
+          <div class='powerContainer'>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+              <input type="radio" name="power-5" id="power-5-on" value="on">
+              <label for="power-5-on">On</label>
+              <input type="radio" name="power-5" id="power-5-off" value="off" checked="checked">
+              <label for="power-5-off">Off</label>
+            </fieldset>
+          </div>
+          <div class='inputContainer'>
+            <select name="input-5" id="input-5" data-mini="true" disabled="true">
+              <option value="1">Input 1</option>
+              <option value="2">Input 2</option>
+              <option value="3">Input 3</option>
+              <option value="4">Input 4</option>
+              <option value="5">Input 5</option>
+              <option value="6">Input 6</option>
+            </select>
+          </div>
+          <div class='title' id='title-5'></div>
+          <div class='clear'></div>
+          <div class='volumeContainer'>
+            <input type="range" name="volume-5" id="volume-5" min="0" max="100" value="50" disabled="true">
+          </div>
+        </div>
+
+        <!-- ========================================= -->
+        <div id="zone-6" class="zone off">
+          <div class='powerContainer'>
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+              <input type="radio" name="power-6" id="power-6-on" value="on">
+              <label for="power-6-on">On</label>
+              <input type="radio" name="power-6" id="power-6-off" value="off" checked="checked">
+              <label for="power-6-off">Off</label>
+            </fieldset>
+          </div>
+          <div class='inputContainer'>
+            <select name="input-6" id="input-6" data-mini="true" disabled="true">
+              <option value="1">Input 1</option>
+              <option value="2">Input 2</option>
+              <option value="3">Input 3</option>
+              <option value="4">Input 4</option>
+              <option value="5">Input 5</option>
+              <option value="6">Input 6</option>
+            </select>
+          </div>
+          <div class='title' id='title-6'></div>
+          <div class='clear'></div>
+          <div class='volumeContainer'>
+            <input type="range" name="volume-6" id="volume-6" min="0" max="100" value="50" disabled="true">
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </body>
+</html>
