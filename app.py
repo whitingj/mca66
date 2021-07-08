@@ -5,7 +5,9 @@ from flask_cors import CORS  # The typical way to import flask-cors
 from flask import request
 import serial 
 
-app = Flask(__name__)
+app = Flask(__name__, 
+    static_url_path='', 
+    static_folder='static')
 cors = CORS(app)
 
 def execute_command(command):
@@ -17,8 +19,8 @@ def execute_command(command):
   
 
 @app.route('/')
-def index():
-    return "Hello, World!"
+def index():   
+  return app.send_static_file('audio.html')
 
 @app.route('/status')
 def status():
@@ -63,4 +65,5 @@ def zone_input(zone_id):
   return jsonify(execute_command(command))
 
 if __name__ == '__main__':
+    #app.run(port=8080, debug = True, host='0.0.0.0')
     app.run(port=8080, host='0.0.0.0')

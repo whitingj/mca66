@@ -18,3 +18,16 @@ print result.json_data()
 ## Files
 App.py is a simple Flask app that provides a REST API to control the different zones. I run this app on port 8080 using supervisord.
 audio.html and audio.js Provide a web interface that will use the REST API to control the speakers. There are some hard coded values in there that works for my server but isn't generally applicable.
+
+## How to Run
+```
+sudo docker rm soundcontrol
+sudo docker build . -t mca66
+sudo docker run -d --restart=always -p 80:8080 --device=/dev/ttyUSB0 --name soundcontrol mca66 
+```
+
+### How to Develop
+```
+sudo docker build . -t mca66
+sudo docker run -p 80:8080 -v $(pwd):/usr/src/app -v $(pwd)/static:/usr/src/app/static --rm --device=/dev/ttyUSB0 --name soundcontrol-dev mca66
+```

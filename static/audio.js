@@ -23,6 +23,9 @@ var audio = {
     5: 'Loft',
     6: 'Laundry'
   },
+  getHost: function() {
+    return window.location.hostname;
+  },
   updateState: function(state) {
     for (var i in state) {
       this.state[i] = state[i];
@@ -40,7 +43,7 @@ var audio = {
     console.log('power', value);
 
     $.ajax({
-      url: 'http://'+window.location.hostname+':8080/zone/'+zone+'/power',
+      url: 'http://'+this.getHost()+'/zone/'+zone+'/power',
       type: 'PUT',
       data: value 
     }).done(function(data) {
@@ -53,7 +56,7 @@ var audio = {
     var zone = that._getZone(event.target);
     that.disableVolume(zone);
     $.ajax({
-      url: 'http://'+window.location.hostname+':8080/zone/'+zone+'/volume',
+      url: 'http://'+this.getHost()+'/zone/'+zone+'/volume',
       type: 'PUT',
       data: {volume: event.target.value}
     }).done(function(data) {
@@ -65,7 +68,7 @@ var audio = {
     console.log('input', arguments);
     var zone = this._getZone(event.target);
     $.ajax({
-      url: 'http://'+window.location.hostname+':8080/zone/'+zone+'/input',
+      url: 'http://'+this.getHost()+'/zone/'+zone+'/input',
       type: 'PUT',
       data: {input: event.target.value}
     }).done(function(data) {
@@ -121,7 +124,7 @@ var audio = {
 };
 
 $.ajax({
-  url: 'http://'+window.location.hostname+':8080/status'
+  url: 'http://'+audio.getHost()+'/status'
 }).done(function(data) {
-  audio.updateState(data);
+  audio.updateStateupdateState(data);
 });
