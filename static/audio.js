@@ -126,5 +126,5 @@ var audio = {
 $.ajax({
   url: 'http://'+audio.getHost()+'/status'
 }).done(function(data) {
-  audio.updateStateupdateState(data);
+  audio.updateState(data);
 });
