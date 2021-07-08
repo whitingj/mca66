@@ -11,12 +11,22 @@ app = Flask(__name__,
 cors = CORS(app)
 
 def execute_command(command):
+  ser = ser_connect()
+  result_json = ser_execute(ser, command)
+  ser_close(ser)
+  return result_json
+  
+def ser_connect():
   port = "/dev/ttyUSB0"
   ser = serial.Serial(port, 38400, timeout=2)
+  return ser
+
+def ser_execute(ser, command):
   result = command.execute(ser)
-  ser.close()
   return result.json_data()
-  
+
+def ser_close(ser):
+  ser.close()
 
 @app.route('/')
 def index():   
@@ -40,22 +50,24 @@ def zone_power(zone_id):
 
 @app.route('/zone/<int:zone_id>/volume', methods=['PUT'])
 def zone_volume(zone_id):
+  ser = ser_connect()
   command = mca66.get_zone_state()
-  zone_state = execute_command(command)
+  zone_state = ser_execute(ser, command)
   current_volume = zone_state[zone_id]['volume']
   volume = int(request.values['volume'])
   if current_volume < volume:
     while current_volume < volume:
       command = mca66.vol_up(zone_id)
-      zone_state = execute_command(command)
+      zone_state = ser_execute(ser, command)
       current_volume = zone_state[zone_id]['volume']
       #print "+", current_volume, "desired", volume
   else:
     while current_volume > volume:
       command = mca66.vol_down(zone_id)
-      zone_state = execute_command(command)
+      zone_state = ser_execute(ser, command)
       current_volume = zone_state[zone_id]['volume']
       #print "-", current_volume, "desired", volume
+  ser_close(ser)
   return jsonify(zone_state)
 
 @app.route('/zone/<int:zone_id>/input', methods=['PUT'])
